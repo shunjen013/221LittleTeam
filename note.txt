@@ -1,0 +1,6 @@
+https://unix.stackexchange.com/questions/317898/using-only-one-cpasku-core
+
+
+g++ -pthread -o test test.c
+taskset -c 1 ./myprogram
+
