@@ -1,0 +1,23 @@
+1. Processor: 
+    model: Intel(R) Core(TM) i7-6500U CPU @ 2.50GHz
+    cycle time:
+    cache sizes:
+        L1 instruction cache: 32KB
+        L1 data cache: 32KB
+        L2 data cache: 256KB
+        L3 data cache: 4096KB
+2. Memory bus
+     34.1 GB/s 
+3. I/O bus
+    4GT/s
+4. RAM size
+    4GiB SODIMM DDR3 Synchronous 1600 MHz (0.6 ns)
+5. Disk: capacity, RPM, controller cache size
+    disk1: HGST HTS541010A7
+        capacity: 200GB
+        RPM: 5400
+        cache size: 32MB
+6. Network card speed
+    10Mb/s
+7. Operating system (including version/release) 
+    ubuntu 14.04 LTS
