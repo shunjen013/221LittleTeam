@@ -1,0 +1,198 @@
+JustReading:	Ans:     35905484
+Mean:    39
+Var:     540
+Cnt_ori: 1000000
+Cnt_new: 986059
+
+procedure_0:	Ans:     37884690
+Mean:    38
+Var:     70
+Cnt_ori: 1000000
+Cnt_new: 999807
+
+procedure_1:	Ans:     38225642
+Mean:    39
+Var:     216
+Cnt_ori: 1000000
+Cnt_new: 998693
+
+procedure_2:	Ans:     38912916
+Mean:    39
+Var:     709
+Cnt_ori: 1000000
+Cnt_new: 999190
+
+procedure_3:	Ans:     38732456
+Mean:    38
+Var:     74
+Cnt_ori: 1000000
+Cnt_new: 999757
+
+procedure_4:	Ans:     39489874
+Mean:    39
+Var:     179
+Cnt_ori: 1000000
+Cnt_new: 999799
+
+procedure_5:	Ans:     39644044
+Mean:    39
+Var:     88
+Cnt_ori: 1000000
+Cnt_new: 999749
+
+procedure_6:	Ans:     40441158
+Mean:    40
+Var:     98
+Cnt_ori: 1000000
+Cnt_new: 999825
+
+procedure_7:	Ans:     40398160
+Mean:    40
+Var:     197
+Cnt_ori: 1000000
+Cnt_new: 999748
+
+JustReading:	Ans:     36137824
+Mean:    36
+Var:     113
+Cnt_ori: 1000000
+Cnt_new: 999804
+
+SystemCall:	Ans:     88209800
+Mean:    88
+Var:     150
+Cnt_ori: 1000000
+Cnt_new: 999929
+
+JustReading:	Ans:     36131494
+Mean:    36
+Var:     100
+Cnt_ori: 1000000
+Cnt_new: 999764
+
+procedure_0:	Ans:     37780418
+Mean:    38
+Var:     105
+Cnt_ori: 1000000
+Cnt_new: 999732
+
+procedure_1:	Ans:     38339580
+Mean:    39
+Var:     391
+Cnt_ori: 1000000
+Cnt_new: 999340
+
+procedure_2:	Ans:     38812762
+Mean:    39
+Var:     125
+Cnt_ori: 1000000
+Cnt_new: 999593
+
+procedure_3:	Ans:     38728288
+Mean:    38
+Var:     94
+Cnt_ori: 1000000
+Cnt_new: 999779
+
+procedure_4:	Ans:     39554394
+Mean:    40
+Var:     133
+Cnt_ori: 1000000
+Cnt_new: 999693
+
+procedure_5:	Ans:     39606920
+Mean:    40
+Var:     120
+Cnt_ori: 1000000
+Cnt_new: 999785
+
+procedure_6:	Ans:     40419834
+Mean:    40
+Var:     90
+Cnt_ori: 1000000
+Cnt_new: 999758
+
+procedure_7:	Ans:     40728886
+Mean:    40
+Var:     87
+Cnt_ori: 1000000
+Cnt_new: 999804
+
+JustReading:	Ans:     36239208
+Mean:    36
+Var:     95
+Cnt_ori: 1000000
+Cnt_new: 999760
+
+SystemCall:	Ans:     88765618
+Mean:    89
+Var:     146
+Cnt_ori: 1000000
+Cnt_new: 999875
+
+JustReading:	Ans:     36223880
+Mean:    36
+Var:     58
+Cnt_ori: 1000000
+Cnt_new: 999818
+
+procedure_0:	Ans:     37897678
+Mean:    38
+Var:     73
+Cnt_ori: 1000000
+Cnt_new: 999782
+
+procedure_1:	Ans:     38099244
+Mean:    38
+Var:     113
+Cnt_ori: 1000000
+Cnt_new: 999840
+
+procedure_2:	Ans:     38715562
+Mean:    39
+Var:     102
+Cnt_ori: 1000000
+Cnt_new: 999746
+
+procedure_3:	Ans:     38952654
+Mean:    39
+Var:     108
+Cnt_ori: 1000000
+Cnt_new: 999493
+
+procedure_4:	Ans:     39644098
+Mean:    39
+Var:     70
+Cnt_ori: 1000000
+Cnt_new: 999665
+
+procedure_5:	Ans:     39611634
+Mean:    39
+Var:     101
+Cnt_ori: 1000000
+Cnt_new: 999778
+
+procedure_6:	Ans:     41123060
+Mean:    41
+Var:     102
+Cnt_ori: 1000000
+Cnt_new: 999336
+
+procedure_7:	Ans:     40396844
+Mean:    40
+Var:     126
+Cnt_ori: 1000000
+Cnt_new: 999814
+
+JustReading:	Ans:     36276654
+Mean:    36
+Var:     101
+Cnt_ori: 1000000
+Cnt_new: 999778
+
+SystemCall:	Ans:     88222702
+Mean:    88
+Var:     132
+Cnt_ori: 1000000
+Cnt_new: 999954
+
