@@ -4,10 +4,11 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <math.h>
+#include <time.h>
 #include "utility.h"
 
-#define ITERATION 1000000
-#define CACHELINE 64/sizeof(int)
+#define ITERATION 100000
+#define CACHELINE 64/sizeof(uint64_t)
 
 inline void start(unsigned long long *ll)
 {
@@ -32,27 +33,23 @@ inline void end(unsigned long long *ll)
     *ll = ( (unsigned long long)lo)|( ((unsigned long long)hi)<<32 );  
 }
 
-
-void accessArray (unsigned long long int size) {
+void accessArray (unsigned long long int size, int stride) {
     unsigned long long int time1, time2;
-    unsigned long long int* record = new unsigned long long[ITERATION];
-    unsigned long long int* res    = new unsigned long long[ITERATION];
+    unsigned long long int* record = new unsigned long long int[ITERATION];
+    unsigned long long int* res    = new unsigned long long int[ITERATION];
     unsigned long long int mean, var, ans;
-    int count;
+    int count=0, it=0;
     unsigned long long int idx = 0;
-
-    int** arr = new int*[size];
-    while (idx + CACHELINE < size) {
-        arr[idx] = (int*) (&arr[idx + CACHELINE]);
-        idx += CACHELINE;
+    uint64_t* arr = new uint64_t[size];
+    for(unsigned long long int i=0; i<size; i++) {
+        arr[i] = (uint64_t)&(arr[(i+stride)%size]);
     }
-    arr[idx] = (int*) (&arr[0]);
-    int** working = (int**) (arr[0]);
-    for (idx = 0; idx < ITERATION; idx ++) {
+    uint64_t tmp = arr[0];    
+    for (it=0; it<ITERATION; ++it) {
         start (&time1);
-        working = (int**) (*working);
+        tmp = *((uint64_t*)tmp);
         end (&time2);
-        record[idx] = time2 - time1;
+        record[it] = time2 - time1;
     }
     ans = filterByVarience(record, ITERATION, res, &count);
  
@@ -61,14 +58,16 @@ void accessArray (unsigned long long int size) {
     delete [] arr;
 }         
 void accessDiffSizeArray (int lo, int hi) {
-    for (int idx = lo; idx <= hi; idx ++) {
-        unsigned long long int siz = (unsigned long long int) pow (2, idx);
-        printf ("2^%d %lld \n", idx, siz);
-        accessArray (siz);
-    } 
+    for(int s=7; s<=10; s++) {
+        for (int idx = lo; idx <= hi; idx ++) {
+            unsigned long long int size = (unsigned long long int) pow (2, idx);
+            printf ("size:2^%d stride:2^%d \n", idx, s);
+            accessArray(size, pow(2,s));
+        } 
+    }
 }    
 int main(int argc, const char * argv[])
 {
-    accessDiffSizeArray (5, 25);
+    accessDiffSizeArray (10, 25);
 }
 
