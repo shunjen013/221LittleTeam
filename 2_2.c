@@ -155,6 +155,6 @@ void getBandwidth(int lo, int hi) {
 }    
 int main(int argc, const char * argv[])
 {
-    getBandwidth(10, 25);
+    getBandwidth(12, 24);
 }
 
