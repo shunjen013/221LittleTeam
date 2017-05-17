@@ -114,7 +114,26 @@ void getBandwidth_writeutil (unsigned long long int size) {
     delete [] record;
     delete [] res;
     delete [] arr;
-}         
+}   
+
+void getLoopOverhead (unsigned long long int size) {
+    unsigned long long int time1, time2;
+    unsigned long long int* record = new unsigned long long int[ITERATION];
+    unsigned long long int* res    = new unsigned long long int[ITERATION];
+    unsigned long long int ans;
+    int count=0, it=0;
+    for(it=0; it<ITERATION; it++) {
+	    start(&time1);
+	    for(unsigned long long int i=0; i<size; i+=16*CACHELINE) {						
+	    }     
+	    end(&time2);
+		record[it] = time2 - time1;    
+	} 
+
+    ans = filterByVarience(record, ITERATION, res, &count); 
+    delete [] record;
+    delete [] res;
+}        
 
 void getBandwidth(int lo, int hi) {
     for (int i=lo; i<=hi; i++) {
@@ -127,9 +146,14 @@ void getBandwidth(int lo, int hi) {
         printf ("write_size:2^%d \n", i);
         getBandwidth_writeutil(size);
     }     
+    for (int i=lo; i<=hi; i++) {
+        unsigned long long int size = (unsigned long long int) pow (2, i);
+        printf ("overhead:2^%d \n", i);
+        getLoopOverhead(size);
+    }   
 }    
 int main(int argc, const char * argv[])
 {
-    getBandwidth(13, 25);
+    getBandwidth(10, 25);
 }
 
