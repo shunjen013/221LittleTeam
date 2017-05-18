@@ -5,9 +5,10 @@
 #include <sys/wait.h>
 #include <math.h>
 #include <time.h>
+#include <cstdint>
 #include "utility.h"
 
-#define ITERATION 10
+#define ITERATION 100
 #define CACHELINE 64/sizeof(uint64_t)
 
 inline void start(unsigned long long *ll)

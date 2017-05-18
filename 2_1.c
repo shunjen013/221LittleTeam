@@ -6,6 +6,7 @@
 #include <sys/wait.h>
 #include <math.h>
 #include <time.h>
+#include <cstdint>
 #include "utility.h"
 
 #define ITERATION 100000
