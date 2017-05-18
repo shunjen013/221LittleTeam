@@ -66,12 +66,12 @@ void accessDiffSizeArray (int lo, int hi) {
         for (int idx = lo; idx <= hi; idx ++) {
             unsigned long long int size = (unsigned long long int) pow (2, idx);
             printf ("size:2^%d stride:2^8*%d \n", idx, s);
-            accessArray(size, pow(2,s));
+            accessArray(size, s);
         } 
     }
 }    
 int main(int argc, const char * argv[])
 {
-    accessDiffSizeArray (11, 24);
+    accessDiffSizeArray (8, 24);
 }
 
