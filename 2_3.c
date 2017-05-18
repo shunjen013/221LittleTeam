@@ -9,7 +9,7 @@
 #include <math.h>
 #include <time.h>
 #include "utility.h"
-
+    
 
 inline void start(unsigned long long *ll)
 {
@@ -47,10 +47,13 @@ int main(int argc, char ** argv) {
   }
   int result = 0;
   int i;
-  unsigned long long arr_time[100];
+  unsigned long long int* arr_time = new unsigned long long int [100];
+  unsigned long long int* inliers = new unsigned long long int[100];
+  int numInliers = 0;
   int idx = 0;
+  unsigned long long int ans;
 
-  for (i = 0; i < stats.st_size; i = i+4096*1024) {
+  for (i = 0; i < stats.st_size; i = i+4096*128) {
     start(&time1);
     result = map[i];
     end(&time2);
@@ -61,10 +64,14 @@ int main(int argc, char ** argv) {
     else
         break;
   }
-  printf("IDX:%d\n", idx);
-  for (i = 0 ; i < idx ; i++){
-    printf("time:%d: %llu\n", i, arr_time[i]);
-    }
+  
+  for (i = 0 ; i < idx; i++){
+    printf("%d:%llu\n", i, arr_time[i]);
+  }
+  
+  ans = filterByVarience(arr_time, idx, inliers, &numInliers); 
+  delete []arr_time;
+  delete []inliers;
   munmap(map, stats.st_size);
   return result;
 }
