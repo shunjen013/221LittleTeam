@@ -8,7 +8,7 @@
 #include <cstdint>
 #include "utility.h"
 
-#define ITERATION 100
+#define ITERATION 10
 #define CACHELINE 64/sizeof(uint64_t)
 
 inline void start(unsigned long long *ll)
@@ -48,22 +48,22 @@ void getBandwidth_readutil (unsigned long long int size) {
     for(it=0; it<ITERATION; it++) {
 	    start(&time1);
 	    for(unsigned long long int i=0; i<size; i+=16*CACHELINE) {
-	    	sum = arr[i];
-	    	sum = arr[i+1*CACHELINE];
-	    	sum = arr[i+2*CACHELINE];
-	    	sum = arr[i+3*CACHELINE];
-	    	sum = arr[i+4*CACHELINE];
-	    	sum = arr[i+5*CACHELINE];
-	    	sum = arr[i+6*CACHELINE];
-	    	sum = arr[i+7*CACHELINE];
-	    	sum = arr[i+8*CACHELINE];
-	    	sum = arr[i+9*CACHELINE];
-	    	sum = arr[i+10*CACHELINE];  
-	    	sum = arr[i+11*CACHELINE];  
-	    	sum = arr[i+12*CACHELINE]; 
-	    	sum = arr[i+13*CACHELINE];  
-	    	sum = arr[i+14*CACHELINE];  
-	    	sum = arr[i+15*CACHELINE];    	    	     	    	  	    	    	    	    	    	    	    	    	    	
+	    	sum += arr[i];
+	    	sum += arr[i+1*CACHELINE];
+	    	sum += arr[i+2*CACHELINE];
+	    	sum += arr[i+3*CACHELINE];
+	    	sum += arr[i+4*CACHELINE];
+	    	sum += arr[i+5*CACHELINE];
+	    	sum += arr[i+6*CACHELINE];
+	    	sum += arr[i+7*CACHELINE];
+	    	sum += arr[i+8*CACHELINE];
+	    	sum += arr[i+9*CACHELINE];
+	    	sum += arr[i+10*CACHELINE];  
+	    	sum += arr[i+11*CACHELINE];  
+	    	sum += arr[i+12*CACHELINE]; 
+	    	sum += arr[i+13*CACHELINE];  
+	    	sum += arr[i+14*CACHELINE];  
+	    	sum += arr[i+15*CACHELINE];    	    	     	    	  	    	    	    	    	    	    	    	    	    	
 	    }     
 	    end(&time2);
 		record[it] = time2 - time1;    
@@ -124,7 +124,7 @@ void getLoopOverhead (unsigned long long int size) {
     int count=0, it=0;
     for(it=0; it<ITERATION; it++) {
 	    start(&time1);
-	    for(unsigned long long int i=0; i<size; i+=16*CACHELINE) {						
+	    for(unsigned long long int i=0; i<size; i+=16*CACHELINE) {					
 	    }     
 	    end(&time2);
 		record[it] = time2 - time1;    
@@ -156,6 +156,6 @@ void getBandwidth(int lo, int hi) {
 }    
 int main(int argc, const char * argv[])
 {
-    getBandwidth(10, 25);
+    getBandwidth(20, 30);
 }
 
