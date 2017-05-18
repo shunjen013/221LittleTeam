@@ -151,6 +151,8 @@ void getBandwidth(int lo, int hi) {
         printf ("overhead:2^%d \n", i);
         getLoopOverhead(size);
     }   
+    int a = sizeof(uint64_t);
+    printf("%d", a);
 }    
 int main(int argc, const char * argv[])
 {
