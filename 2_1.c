@@ -43,18 +43,17 @@ void accessArray (unsigned long long int size, int stride) {
     uint64_t* arr = new uint64_t[size];
     srand(time(NULL));
     for(unsigned long long int i=0; i<size; i++) {
-        //arr[i] = (uint64_t)&(arr[(i+stride)%size]);
-        arr[i] = 0;
+        arr[i] = (uint64_t)&(arr[(i+stride)%size]);
+        //arr[i] = 0;
     }
     uint64_t tmp = arr[0];    
     unsigned long long int random = 0;
     for (it=0; it<ITERATION; ++it) {
         start (&time1);
-        //tmp = *((uint64_t*)tmp);
-        tmp = arr[random];
+        tmp = *((uint64_t*)tmp);
         end (&time2);
         record[it] = time2 - time1;
-        random = (random + rand()%10000 + CACHELINE)%size;
+        //random = (random + 10000 + CACHELINE)%size;
     }
     ans = filterByVarience(record, ITERATION, res, &count);
  
@@ -63,7 +62,7 @@ void accessArray (unsigned long long int size, int stride) {
     delete [] arr;
 }         
 void accessDiffSizeArray (int lo, int hi) {
-    for(int s=1; s<=5; s++) {
+    for(int s=8; s<=10; s++) {
         for (int idx = lo; idx <= hi; idx ++) {
             unsigned long long int size = (unsigned long long int) pow (2, idx);
             printf ("size:2^%d stride:2^%d \n", idx, s);
@@ -73,6 +72,6 @@ void accessDiffSizeArray (int lo, int hi) {
 }    
 int main(int argc, const char * argv[])
 {
-    accessDiffSizeArray (10, 24);
+    accessDiffSizeArray (11, 22);
 }
 
