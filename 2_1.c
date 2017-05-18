@@ -35,7 +35,7 @@ inline void end(unsigned long long *ll)
     *ll = ( (unsigned long long)lo)|( ((unsigned long long)hi)<<32 );  
 }
 
-void accessArray (unsigned long long int size, int stride) {
+void accessArray (unsigned long long int size, int xstride) {
     unsigned long long int time1, time2;
     unsigned long long int* record = new unsigned long long int[ITERATION];
     unsigned long long int* res    = new unsigned long long int[ITERATION];
@@ -43,7 +43,7 @@ void accessArray (unsigned long long int size, int stride) {
     int count=0, it=0;
     unsigned long long int idx = 0;
     uint64_t* arr = new uint64_t[size];
-    srand(time(NULL));
+    int stride = pow(2, 8)*xstride;
     for(unsigned long long int i=0; i<size; i++) {
         arr[i] = (uint64_t)&(arr[(i+stride)%size]);
     }
@@ -62,16 +62,16 @@ void accessArray (unsigned long long int size, int stride) {
     delete [] arr;
 }         
 void accessDiffSizeArray (int lo, int hi) {
-    for(int s=8; s<=10; s++) {
+    for(int s=1; s<=8; s++) {
         for (int idx = lo; idx <= hi; idx ++) {
             unsigned long long int size = (unsigned long long int) pow (2, idx);
-            printf ("size:2^%d stride:2^%d \n", idx, s);
-            accessArray(size, pow(2,s));
+            printf ("size:2^%d stride:2^8*%d \n", idx, s);
+            accessArray(size, s);
         } 
     }
 }    
 int main(int argc, const char * argv[])
 {
-    accessDiffSizeArray (11, 22);
+    accessDiffSizeArray (8, 24);
 }
 
