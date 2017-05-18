@@ -45,8 +45,8 @@ unsigned long long int filterByVarience
     unsigned long long int mean, var, res;
     mean = computeMean (arr, len);
     var = computeVarience (arr, len, mean);
-    res = computeFilter(arr, len, mean, var, arr_new, len_new);
-    printf("\tAns:     %llu\n", res);
+    res = computeFilter(arr, len, mean, mean, arr_new, len_new);
+    printf("Ans:     %llu\n", res/(*len_new));
     printf("Mean:    %llu\n", mean);
     printf("Var:     %llu\n", var);
     printf("Cnt_ori: %d\n", len);
