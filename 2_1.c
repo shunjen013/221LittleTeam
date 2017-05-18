@@ -5,6 +5,7 @@
 #include <sys/wait.h>
 #include <math.h>
 #include <time.h>
+#include <cstdint>
 #include "utility.h"
 
 #define ITERATION 100000
@@ -58,7 +59,7 @@ void accessArray (unsigned long long int size, int stride) {
     delete [] arr;
 }         
 void accessDiffSizeArray (int lo, int hi) {
-    for(int s=7; s<=10; s++) {
+    for(int s=8; s<=11; s++) {
         for (int idx = lo; idx <= hi; idx ++) {
             unsigned long long int size = (unsigned long long int) pow (2, idx);
             printf ("size:2^%d stride:2^%d \n", idx, s);
@@ -68,6 +69,6 @@ void accessDiffSizeArray (int lo, int hi) {
 }    
 int main(int argc, const char * argv[])
 {
-    accessDiffSizeArray (10, 25);
+    accessDiffSizeArray (8, 24);
 }
 
