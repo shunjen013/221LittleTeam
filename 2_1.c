@@ -46,17 +46,14 @@ void accessArray (unsigned long long int size, int stride) {
     srand(time(NULL));
     for(unsigned long long int i=0; i<size; i++) {
         arr[i] = (uint64_t)&(arr[(i+stride)%size]);
-        //arr[i] = 0;
     }
     uint64_t tmp = arr[0];    
     unsigned long long int random = 0;
     for (it=0; it<ITERATION; ++it) {
         start (&time1);
         tmp = *((uint64_t*)tmp);
-        //tmp = arr[random];
         end (&time2);
         record[it] = time2 - time1;
-        //random = (random + rand()%10000 + CACHELINE)%size;
     }
     ans = filterByVarience(record, ITERATION, res, &count);
  
@@ -76,6 +73,5 @@ void accessDiffSizeArray (int lo, int hi) {
 int main(int argc, const char * argv[])
 {
     accessDiffSizeArray (11, 22);
-    printf("%lu \n", sizeof(uint64_t));
 }
 
