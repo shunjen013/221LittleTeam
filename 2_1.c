@@ -72,6 +72,6 @@ void accessDiffSizeArray (int lo, int hi) {
 }    
 int main(int argc, const char * argv[])
 {
-    accessDiffSizeArray (11, 22);
+    accessDiffSizeArray (11, 24);
 }
 
