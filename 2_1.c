@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <cstdint>
 #include <unistd.h>
 #include <pthread.h>
 #include <stdlib.h>
@@ -44,7 +45,6 @@ void accessArray (unsigned long long int size, int stride) {
     srand(time(NULL));
     for(unsigned long long int i=0; i<size; i++) {
         arr[i] = (uint64_t)&(arr[(i+stride)%size]);
-        //arr[i] = 0;
     }
     uint64_t tmp = arr[0];    
     unsigned long long int random = 0;
@@ -53,7 +53,6 @@ void accessArray (unsigned long long int size, int stride) {
         tmp = *((uint64_t*)tmp);
         end (&time2);
         record[it] = time2 - time1;
-        //random = (random + 10000 + CACHELINE)%size;
     }
     ans = filterByVarience(record, ITERATION, res, &count);
  
