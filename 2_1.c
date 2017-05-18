@@ -62,7 +62,7 @@ void accessArray (unsigned long long int size, int xstride) {
     delete [] arr;
 }         
 void accessDiffSizeArray (int lo, int hi) {
-    for(int s=1; s<=6; s++) {
+    for(int s=1; s<=8; s++) {
         for (int idx = lo; idx <= hi; idx ++) {
             unsigned long long int size = (unsigned long long int) pow (2, idx);
             printf ("size:2^%d stride:2^8*%d \n", idx, s);
