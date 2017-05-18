@@ -1,4 +1,4 @@
-all: driver123 driver4 driver5 driver2_1 driver2_2
+all: driver123 driver4 driver5 driver2_1 driver2_2 driver2_3
 driver123: 123.o utility.o 
 	g++ -o driver123 123.o utility.o
 driver4: 4.o utility.o
@@ -8,7 +8,9 @@ driver5: 5.o utility.o
 driver2_1: 2_1.o utility.o
 	g++ -O3 -o driver2_1 2_1.o utility.o
 driver2_2: 2_2.o utility.o
-	g++ -O3 -o driver2_2 2_2.o utility.o	
+	g++ -O3 -o driver2_2 2_2.o utility.o
+driver2_3: 2_3.o utility.o
+	g++ -O3 -o driver2_3 2_3.o utility.o	
 123.o: 123.c utility.h
 	g++ -c 123.c
 4.o: 4.c utility.h
@@ -20,7 +22,8 @@ utility.o: utility.c utility.h
 clean:
 	rm -f *.o driver123 driver4 driver5 driver2_1 driver2_2
 2_1.o: 2_1.c utility.h
-	g++ -c 2_1.c
+	g++ -c -std=c++11 2_1.c
 2_2.o: 2_2.c utility.h
-	g++ -c 2_2.c	
-
+	g++ -c -std=c++11 2_2.c	
+2_3.o: 2_3.c utility.h
+	g++ -c -std=c++11 2_3.c
