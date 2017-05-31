@@ -6,6 +6,10 @@
 #include <time.h>
 #include <sys/time.h>
 #include <sys/syscall.h>
+<<<<<<< HEAD
+=======
+#include <asm/unistd.h>
+>>>>>>> a6d333f15e07242222072e7b6466eaeb1f1027f1
 #define ITERATION 1000000
 
 inline void start(unsigned long long *ll)
@@ -144,8 +148,9 @@ static void measureReadingAndProcedureCallOverhead(int iteration)
         start (&time1);
         //gettimeofday(&GG, NULL);
         //getuid();
-        pid = __syscall(__NR_getpid);
-        end (&time2);
+	    //getpid();
+	    pid = syscall(__NR_getpid);
+	    end (&time2);
         record[idx] = time2 - time1;
     }
     printf("SystemCall:");
