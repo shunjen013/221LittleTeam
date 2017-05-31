@@ -140,7 +140,8 @@ static void measureReadingAndProcedureCallOverhead(int iteration)
     struct timeval GG;
     for (idx = 0; idx < iteration; ++idx) {
         start (&time1);
-        gettimeofday(&GG, NULL);
+        getuid();
+
         end (&time2);
         record[idx] = time2 - time1;
     }
