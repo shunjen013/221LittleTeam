@@ -145,9 +145,9 @@ static void measureReadingAndProcedureCallOverhead(int iteration)
         start (&time1);
         //gettimeofday(&GG, NULL);
         //getuid();
-	getpid();
-	//pid = syscall(__NR_getpid);
-	end (&time2);
+	    //getpid();
+	    pid = syscall(__NR_getpid);
+	    end (&time2);
         record[idx] = time2 - time1;
     }
     printf("SystemCall:");
