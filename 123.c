@@ -5,6 +5,7 @@
 #include "utility.h"
 #include <time.h>
 #include <sys/time.h>
+#include <sys/syscall.h>
 #define ITERATION 1000000
 
 inline void start(unsigned long long *ll)
@@ -138,9 +139,12 @@ static void measureReadingAndProcedureCallOverhead(int iteration)
     ans = filterByVarience(record, iteration, res, &count);
 
     struct timeval GG;
+    int pid;
     for (idx = 0; idx < iteration; ++idx) {
         start (&time1);
-        gettimeofday(&GG, NULL);
+        //gettimeofday(&GG, NULL);
+        //getuid();
+        pid = __syscall(__NR_getpid);
         end (&time2);
         record[idx] = time2 - time1;
     }
