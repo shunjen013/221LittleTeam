@@ -1,0 +1,3 @@
+g++ -o Client 3_1Client.cpp
+g++ -o Server 3_1Server.cpp
+
