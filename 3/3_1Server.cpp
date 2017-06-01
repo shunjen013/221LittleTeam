@@ -55,7 +55,13 @@ int main(int argc, char * argv[])
 		fprintf(stderr,"socket error: %s\n",gai_strerror(status));
 	}
 	
-	// Bind the socket to the address of my local machine and port number 
+	// solved 
+	int yes=1;
+	if (setsockopt(listner, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes)) == -1) {
+	    perror("setsockopt");
+	    _exit(1);
+	}	
+	// Bind the socket to the address of my local machine and port number 	
 	status = bind(listner, res->ai_addr, res->ai_addrlen); 
 	if(status < 0)
 	{
