@@ -68,7 +68,8 @@ void file_cache() {
         fclose(fp);  
         free(temp);              
     }    
-    for(int i=1; i<10; i++) {
+
+    for(int i=1; i<4; i++) {
         FILE *fp = fopen("myfile", "w");
         unsigned long long int size = i*pow(2,30);
         fflush(fp);
