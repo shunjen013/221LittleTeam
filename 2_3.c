@@ -52,8 +52,18 @@ int main(int argc, char ** argv) {
   int numInliers = 0;
   int idx = 0;
   unsigned long long int ans;
-
-  for (i = 0; i < stats.st_size; i = i+4096*128) {
+/*
+for (i = 0 ; i < 100; i++){
+    unsigned long r1 = rand();
+    unsigned long r2 = rand();
+    unsigned long r3= ((r1<<32)| r2)%stats.st_size;
+    start(&time1);
+    result = map[r3];
+    end(&time2);
+    arr_time[i] = time2 - time1;
+}
+*/
+  for (i = 0; i < stats.st_size; i = i+4096*8) {
     start(&time1);
     result = map[i];
     end(&time2);
@@ -65,8 +75,8 @@ int main(int argc, char ** argv) {
         break;
   }
   
-  for (i = 0 ; i < idx; i++){
-    printf("%d:%llu\n", i, arr_time[i]);
+  for (i = 0 ; i < 100; i++){
+    printf("%llu\n", arr_time[i]);
   }
   
   ans = filterByVarience(arr_time, idx, inliers, &numInliers); 

@@ -8,6 +8,7 @@
 #include <cstdint>
 #include "utility.h"
 
+
 #define ITERATION 100
 #define CACHELINE 64/sizeof(uint64_t)
 
