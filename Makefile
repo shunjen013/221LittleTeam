@@ -1,4 +1,4 @@
-all: driver123 driver4 driver5 driver2_1 driver2_2 driver2_3
+all: driver123 driver4 driver5 driver2_1 driver2_2 driver2_3 driver_f
 driver123: 123.o utility.o 
 	g++ -o driver123 123.o utility.o
 driver4: 4.o utility.o
@@ -11,6 +11,8 @@ driver2_2: 2_2.o utility.o
 	g++ -O3 -o driver2_2 2_2.o utility.o
 driver2_3: 2_3.o utility.o
 	g++ -O3 -o driver2_3 2_3.o utility.o	
+driver_f: filesys.o utility.o
+	g++ -o driver_f filesys.o utility.o	
 123.o: 123.c utility.h
 	g++ -c 123.c
 4.o: 4.c utility.h
@@ -27,3 +29,5 @@ clean:
 	g++ -c -std=c++11 2_2.c	
 2_3.o: 2_3.c utility.h
 	g++ -c -std=c++11 2_3.c
+filesys.o: filesys.c utility.h
+	g++ -c filesys.c	
