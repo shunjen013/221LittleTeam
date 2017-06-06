@@ -8,7 +8,7 @@
 #include <cstdint>
 #include "utility.h"
 
-#define ITERATION 3
+#define ITERATION 10
 
 inline void start(unsigned long long *ll)
 {
@@ -69,7 +69,7 @@ void file_cache() {
         fclose(fp);  
         free(temp);              
     }    
-    for(int i=1; i<10; i++) {
+    for(int i=1; i<5; i++) {
         FILE *fp = fopen("myfile", "w");
         unsigned long long int size = i*pow(2,30);
         fflush(fp);
