@@ -7,7 +7,7 @@
 #include <time.h>
 #include "utility.h"
 
-#define ITERATION 10
+#define ITERATION 3
 
 inline void start(unsigned long long *ll)
 {
@@ -47,26 +47,27 @@ void file_cache() {
         fclose(fp);
         fp = fopen("myfile", "r");
         char *temp = (char*) malloc (sizeof(char)*size);
-        unsigned long long int result = fread(temp, 512, size/512, fp);    
+        unsigned long long int result = fread(temp, 1, size, fp);    
         srand(time(NULL));
         char buffer[512];
         for (it=0; it<ITERATION; ++it) {
-            /*uint64_t num = 
-              (((uint64_t) rand() <<  0) & 0x000000000000FFFFull) | 
-              (((uint64_t) rand() << 16) & 0x00000000FFFF0000ull) | 
-              (((uint64_t) rand() << 32) & 0x0000FFFF00000000ull) |
-              (((uint64_t) rand() << 48) & 0xFFFF000000000000ull);  */  
+            unsigned long long int num = 
+              (((unsigned long long int) rand() <<  0) & 0x000000000000FFFFull) | 
+              (((unsigned long long int) rand() << 16) & 0x00000000FFFF0000ull) | 
+              (((unsigned long long int) rand() << 32) & 0x0000FFFF00000000ull) |
+              (((unsigned long long int) rand() << 48) & 0xFFFF000000000000ull);    
             rewind(fp);          
             start (&time1);
-            //fseek(fp , num/512*512%size , SEEK_SET); 
+            //fseek(fp , num%size , SEEK_SET); 
             //fread(buffer, 1, 512, fp);
-            fread(temp, 512, size/512, fp);
+            //fread(temp, 512, size/512, fp);
+            result = fread(temp, 1, size, fp);
             end (&time2);
-            record[it] = (time2 - time1) / int(pow(2,i-20));
+            record[it] = (time2 - time1) * pow(2, 12) / size;
         }
         ans = filterByVarience(record, ITERATION, res, &count);     
         fclose(fp);  
-        free(temp);              
+        free(temp);               
     }    
 
     for(int i=1; i<4; i++) {
@@ -82,22 +83,23 @@ void file_cache() {
         srand(time(NULL));
         char buffer[512];
         for (it=0; it<ITERATION; ++it) {
-            /*uint64_t num = 
-              (((uint64_t) rand() <<  0) & 0x000000000000FFFFull) | 
-              (((uint64_t) rand() << 16) & 0x00000000FFFF0000ull) | 
-              (((uint64_t) rand() << 32) & 0x0000FFFF00000000ull) |
-              (((uint64_t) rand() << 48) & 0xFFFF000000000000ull);  */  
+            unsigned long long int num = 
+              (((unsigned long long int) rand() <<  0) & 0x000000000000FFFFull) | 
+              (((unsigned long long int) rand() << 16) & 0x00000000FFFF0000ull) | 
+              (((unsigned long long int) rand() << 32) & 0x0000FFFF00000000ull) |
+              (((unsigned long long int) rand() << 48) & 0xFFFF000000000000ull);    
             rewind(fp);          
             start (&time1);
-            //fseek(fp , num/512*512%size , SEEK_SET); 
+            //fseek(fp , num%size , SEEK_SET); 
             //fread(buffer, 1, 512, fp);
-            fread(temp, 1, size, fp);
+            //fread(temp, 1, size, fp);
+            result = fread(temp, 1, size, fp);
             end (&time2);
-            record[it] = (time2 - time1) / int(pow(2,10)*i);
+            record[it] = (time2 - time1) * pow(2, 12) / size;
         }
         ans = filterByVarience(record, ITERATION, res, &count);     
         fclose(fp);  
-        free(temp);              
+        free(temp);         
     }     
 }
 
