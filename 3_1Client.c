@@ -28,7 +28,7 @@ int main(int argv, char * argc [])
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_flags = AI_PASSIVE;
 
-	status = getaddrinfo("127.0.0.1","8888", &hints, &res);
+	status = getaddrinfo("66.75.248.247","8888", &hints, &res);
 	if(status != 0)
 	{
 		fprintf(stderr, "Error getaddrinfo\n");
@@ -41,6 +41,7 @@ int main(int argv, char * argc [])
 		fprintf(stderr, "Error socket \n");
 		exit(2);
 	}
+
 	
 	status = connect(socket_id, res->ai_addr, res->ai_addrlen);
 	if(status < 0)
@@ -50,11 +51,11 @@ int main(int argv, char * argc [])
 	}
 	
 	int numbytes = 0;
-	char buf[10];
+	char buf[64];
 
 	for (int i = 0; i < ITERATION; i ++) {
-		recv(socket_id, buf, 10, 0);
-		send(socket_id,"Send777", 7, 0);
+		recv(socket_id, buf, 64, 0);
+		send(socket_id,"1111111111111111111111111111111111111111111111111111111111111111", 64, 0);
 	}
 
 	

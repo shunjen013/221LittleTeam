@@ -7,13 +7,14 @@
 #include<arpa/inet.h>
 #include<iostream>
 
+
 #include <stdlib.h>
 #include <sys/types.h>
 #include "utility.h"
 #include <time.h>
 #include <sys/time.h>
 #include <asm/unistd.h>
-#define ITERATION 100000
+#define ITERATION 100
 
 using namespace std;
 
@@ -84,7 +85,7 @@ int main(int argc, char * argv[])
 	hints.ai_flags = AI_PASSIVE; 
 	
 	// Fill the res data structure and make sure that the results make sense. 
-	status = getaddrinfo(NULL, "8888" , &hints, &res);
+	status = getaddrinfo(NULL, "5567" , &hints, &res);
 	if(status != 0)
 	{
 		fprintf(stderr,"getaddrinfo error: %s\n",gai_strerror(status));
@@ -142,16 +143,18 @@ int main(int argc, char * argv[])
 	printf("I am now connected to %s \n",s);
 
 	int numbytes = 0;
-	char buf[10];
+	char buf[64];
+	unsigned int microseconds = 1;
 
 	for (int it = 0; it < ITERATION; it ++) {
 		start (&time1);
-		send(new_conn_fd, "Welcome", 7,0);
-		recv(new_conn_fd, buf, 10, 0);
+		send(new_conn_fd, "1111111111111111111111111111111111111111111111111111111111111111", 64, 0);
+		recv(new_conn_fd, buf, 64, 0);
 		end (&time2);
 		record[it] = time2 - time1;
+		sleep(microseconds);
 		//buf[numbytes] = '\0';
-		//printf("Received %s \n", buf);
+		printf("Received %s \n", buf);
 	}
 	
 	// Close the socket before we finish 
