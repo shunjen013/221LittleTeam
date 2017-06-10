@@ -9,7 +9,7 @@
 #include<iostream>
 
 #define PORT "8889"
-#define IP "127.0.0.1"
+#define IP "100.64.6.134"
 
 #define ITERATION 100
 #define ARR_SIZE 10000

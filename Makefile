@@ -46,4 +46,4 @@ clean:
 3_2Client.o: 3_2Client.c utility.h
 	g++ -c 3_2Client.c
 filesys.o: filesys.c utility.h
-	g++ -c -std=c++11 filesys.c	
+	g++ -c -std=c++11 filesys.c
