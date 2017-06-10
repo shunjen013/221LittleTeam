@@ -6,7 +6,9 @@
 #include <sys/types.h>
 #include <netdb.h>
 #include <arpa/inet.h>
-#define ITERATION 100000
+#define ITERATION 100
+#define PORT "8888"
+#define IP "100.81.22.217"
 
 int main(int argv, char * argc [])
 {
@@ -28,7 +30,7 @@ int main(int argv, char * argc [])
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_flags = AI_PASSIVE;
 
-	status = getaddrinfo("66.75.248.247","8888", &hints, &res);
+	status = getaddrinfo(IP, PORT, &hints, &res);
 	if(status != 0)
 	{
 		fprintf(stderr, "Error getaddrinfo\n");

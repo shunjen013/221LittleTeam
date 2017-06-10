@@ -15,6 +15,7 @@
 #include <sys/time.h>
 #include <asm/unistd.h>
 #define ITERATION 100
+#define PORT "5567"
 
 using namespace std;
 
@@ -85,7 +86,7 @@ int main(int argc, char * argv[])
 	hints.ai_flags = AI_PASSIVE; 
 	
 	// Fill the res data structure and make sure that the results make sense. 
-	status = getaddrinfo(NULL, "5567" , &hints, &res);
+	status = getaddrinfo(NULL, PORT , &hints, &res);
 	if(status != 0)
 	{
 		fprintf(stderr,"getaddrinfo error: %s\n",gai_strerror(status));
@@ -144,7 +145,7 @@ int main(int argc, char * argv[])
 
 	int numbytes = 0;
 	char buf[64];
-	unsigned int microseconds = 1;
+	//unsigned int microseconds = 1;
 
 	for (int it = 0; it < ITERATION; it ++) {
 		start (&time1);
@@ -152,9 +153,9 @@ int main(int argc, char * argv[])
 		recv(new_conn_fd, buf, 64, 0);
 		end (&time2);
 		record[it] = time2 - time1;
-		sleep(microseconds);
+		//sleep(microseconds);
 		//buf[numbytes] = '\0';
-		printf("Received %s \n", buf);
+		//printf("Received %s \n", buf);
 	}
 	
 	// Close the socket before we finish 
