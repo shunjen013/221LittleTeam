@@ -28,7 +28,7 @@ int main(int argv, char * argc [])
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_flags = AI_PASSIVE;
 
-	status = getaddrinfo("127.0.0.1","8888", &hints, &res);
+	status = getaddrinfo("66.75.248.247","8888", &hints, &res);
 	if(status != 0)
 	{
 		fprintf(stderr, "Error getaddrinfo\n");
