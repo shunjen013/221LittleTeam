@@ -8,8 +8,13 @@
 #include <arpa/inet.h>
 #include<iostream>
 
+<<<<<<< HEAD
+#define PORT "8888"
+#define IP "10.42.0.1"
+=======
 #define PORT "5566"
 #define IP "127.0.0.1"
+>>>>>>> 756aada493eb332a5bdb0cf732e5507b1bfdea93
 
 #define ITERATION 100
 #define ARR_SIZE 10000
