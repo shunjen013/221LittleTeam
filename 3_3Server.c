@@ -7,48 +7,11 @@
 #include<arpa/inet.h>
 #include<iostream>
 
-#include <stdlib.h>
-#include <sys/types.h>
-#include "utility.h"
-#include <time.h>
-#include <sys/time.h>
-#include <asm/unistd.h>
-
-<<<<<<< HEAD
-#define PORT "8888"
-=======
-#define PORT "5566"
->>>>>>> 756aada493eb332a5bdb0cf732e5507b1bfdea93
 
 #define ITERATION 100
-#define ARR_SIZE 10000
-#define TOTAL 160000000
+#define PORT "5566"
 
 using namespace std;
-
-inline void start(unsigned long long *ll)
-{
-    unsigned int lo, hi;                     
-    asm volatile ("cpuid\n\t"
-		  "rdtsc\n\t"
-		  "mov %%edx, %0\n\t"
-		  "mov %%eax, %1\n\t"
-		  : "=r" (hi), "=r" (lo)
-		  :: "%rax", "%rbx", "%rcx", "%rdx");
-    *ll = ( (unsigned long long)lo)|( ((unsigned long long)hi)<<32 );  
-}
-inline void end(unsigned long long *ll)
-{
-    unsigned int lo, hi;                     
-    asm volatile ("rdtscp\n\t"
-		  "mov %%edx, %0\n\t"
-		  "mov %%eax, %1\n\t"
-		  "cpuid\n\t"
-		  : "=r" (hi), "=r" (lo)
-		  :: "%rax", "%rbx", "%rcx", "%rdx");
-    *ll = ( (unsigned long long)lo)|( ((unsigned long long)hi)<<32 );  
-}
-
 
 void * get_in_addr(struct sockaddr * sa)
 {
@@ -62,13 +25,6 @@ void * get_in_addr(struct sockaddr * sa)
 
 int main(int argc, char * argv[])
 {
-	// for time measurement
-	unsigned long long int time1, time2;
-	unsigned long long int* record = new unsigned long long int[ITERATION];
-	unsigned long long int* result = new unsigned long long int[ITERATION];
-	unsigned long long int mean, var, ans;
-	int count=0, it=0;
-	unsigned long long int idx = 0;
 
 	// Variables for writing a server. 
 	/*
@@ -93,7 +49,7 @@ int main(int argc, char * argv[])
 	hints.ai_flags = AI_PASSIVE; 
 	
 	// Fill the res data structure and make sure that the results make sense. 
-	status = getaddrinfo(NULL, PORT, &hints, &res);
+	status = getaddrinfo(NULL, PORT , &hints, &res);
 	if(status != 0)
 	{
 		fprintf(stderr,"getaddrinfo error: %s\n",gai_strerror(status));
@@ -140,45 +96,28 @@ int main(int argc, char * argv[])
 	
 	printf("I am now accepting connections ...\n");
 	
-	// Accept a new connection and return back the socket desciptor 
-	new_conn_fd = accept(listner, (struct sockaddr *) & client_addr, &addr_size);	
-	if(new_conn_fd < 0)
-	{
-		fprintf(stderr,"accept: %s\n",gai_strerror(new_conn_fd));
-	}
+	while(1){
+		// Accept a new connection and return back the socket desciptor 
+		new_conn_fd = accept(listner, (struct sockaddr *) & client_addr, &addr_size);	
+		if(new_conn_fd < 0)
+		{
+			fprintf(stderr,"accept: %s\n",gai_strerror(new_conn_fd));
+			continue;
+		}
 	
-	inet_ntop(client_addr.ss_family, get_in_addr((struct sockaddr *) &client_addr),s ,sizeof s); 
-	printf("I am now connected to %s \n",s);
-
-
-	char* buf = new char[ARR_SIZE];
-	char* msg = new char[ARR_SIZE];
-	for (int i = 0; i < ARR_SIZE; i ++) msg[i] = 'a';
-	cerr << "Start" << endl;
-
-	for (int it = 0; it < ITERATION; it ++) {
-		cout << "s" << it << endl;
-		unsigned long long int numbytes = 0;
-		start (&time1);
-		while (numbytes < TOTAL) { 
-			numbytes += send(new_conn_fd, msg, ARR_SIZE, 0);
-		}	
-		end (&time2);
-		record[it] = time2 - time1;
-		cout << "e" << it << endl;
-		//printf("Received %s \n", buf);
+		inet_ntop(client_addr.ss_family, get_in_addr((struct sockaddr *) &client_addr),s ,sizeof s); 
+		printf("I am now connected to %s \n",s);
+		status = send(new_conn_fd,"Welcome", 7,0);
+		if(status == -1)
+		{
+			close(new_conn_fd);
+			_exit(4);
+		}
+		
 	}
-	
 	// Close the socket before we finish 
 	close(new_conn_fd);
-	
-	cerr << "Finish" << endl;
-	ans = filterByVarience(record, ITERATION, result, &count);
-	 
-	delete [] buf;
-	delete [] msg;	
-	delete [] record;
-	delete [] result;
+
 	
 	return 0;
 }
