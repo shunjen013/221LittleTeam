@@ -70,9 +70,9 @@ void file_cache() {
         free(temp);               
     }    
 
-    for(int i=1; i<4; i++) {
+    for(int i=1; i<36; i++) {
         FILE *fp = fopen("myfile", "w");
-        unsigned long long int size = i*pow(2,30);
+        unsigned long long int size = i*pow(2,30)/10;
         fflush(fp);
         ftruncate(fileno(fp), size);
         printf("Size of myfile: %d Gbytes.\n", i);  
