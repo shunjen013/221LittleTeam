@@ -8,12 +8,12 @@
 #include <arpa/inet.h>
 #include<iostream>
 
-#define PORT "8889"
-#define IP "100.64.6.134"
+#define PORT "5566"
+#define IP "127.0.0.1"
 
 #define ITERATION 100
 #define ARR_SIZE 10000
-#define REPEAT 16000
+#define TOTAL 160000000
 
 using namespace std;
 
@@ -65,14 +65,12 @@ int main(int argv, char * argc [])
 	char* msg = new char[ARR_SIZE];
 	for (int i = 0; i < ARR_SIZE; i ++) msg[i] = 'a';
 
+	cerr << "Start" << endl;
 	for (int i = 0; i < ITERATION; i ++) {
-		for (int j = 0; j < REPEAT; j++) { 
-			recv(socket_id, buf, ARR_SIZE, 0);
+		unsigned long long int numbytes = 0;
+		while (numbytes < TOTAL) { 
+			numbytes += recv(socket_id, msg, ARR_SIZE, 0);
 		}
-		/*for (int j = 0; j < REPEAT; j++) { 
-			send(socket_id, msg, ARR_SIZE, 0);
-		}*/
-		send(socket_id, msg, ARR_SIZE, 0);
 	}
 	cerr << "End" << endl;
 
