@@ -30,7 +30,7 @@ driver_f: filesys.o utility.o
 utility.o: utility.c utility.h
 	g++ -c utility.c
 clean:
-	rm -f *.o driver123 driver4 driver5 driver2_1 driver2_2 driver3_1Server driver3_1Client
+	rm -f *.o driver123 driver4 driver5 driver2_1 driver2_2 driver3_1Server driver3_1Client driver3_2Server driver3_2Client
 2_1.o: 2_1.c utility.h
 	g++ -c -std=c++11 2_1.c
 2_2.o: 2_2.c utility.h
@@ -46,4 +46,4 @@ clean:
 3_2Client.o: 3_2Client.c utility.h
 	g++ -c 3_2Client.c
 filesys.o: filesys.c utility.h
-	g++ -c -std=c++11 filesys.c	
+	g++ -c -std=c++11 filesys.c

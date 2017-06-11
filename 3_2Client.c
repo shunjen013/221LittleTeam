@@ -6,9 +6,17 @@
 #include <sys/types.h>
 #include <netdb.h>
 #include <arpa/inet.h>
+#include<iostream>
+
+#define PORT "8889"
+#define IP "100.64.6.134"
+
 #define ITERATION 100
-#define PORT "8888"
-#define IP "100.81.22.217"
+#define ARR_SIZE 10000
+#define REPEAT 16000
+
+using namespace std;
+
 
 int main(int argv, char * argc [])
 {
@@ -53,14 +61,24 @@ int main(int argv, char * argc [])
 	}
 	
 	int numbytes = 0;
-	char buf[64];
+	char* buf = new char[ARR_SIZE];
+	char* msg = new char[ARR_SIZE];
+	for (int i = 0; i < ARR_SIZE; i ++) msg[i] = 'a';
 
 	for (int i = 0; i < ITERATION; i ++) {
-		recv(socket_id, buf, 64, 0);
-		send(socket_id,"1111111111111111111111111111111111111111111111111111111111111111", 64, 0);
+		for (int j = 0; j < REPEAT; j++) { 
+			recv(socket_id, buf, ARR_SIZE, 0);
+		}
+		/*for (int j = 0; j < REPEAT; j++) { 
+			send(socket_id, msg, ARR_SIZE, 0);
+		}*/
+		send(socket_id, msg, ARR_SIZE, 0);
 	}
+	cerr << "End" << endl;
 
-	
+
+	delete [] buf;
+	delete [] msg;
 	freeaddrinfo(res);
 	close(socket_id);	
 	return 0;

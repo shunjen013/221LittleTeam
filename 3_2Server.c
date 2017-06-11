@@ -7,15 +7,18 @@
 #include<arpa/inet.h>
 #include<iostream>
 
-
 #include <stdlib.h>
 #include <sys/types.h>
 #include "utility.h"
 #include <time.h>
 #include <sys/time.h>
 #include <asm/unistd.h>
+
+#define PORT "8889"
+
 #define ITERATION 100
-#define PORT "5567"
+#define ARR_SIZE 10000
+#define REPEAT 16000
 
 using namespace std;
 
@@ -86,7 +89,7 @@ int main(int argc, char * argv[])
 	hints.ai_flags = AI_PASSIVE; 
 	
 	// Fill the res data structure and make sure that the results make sense. 
-	status = getaddrinfo(NULL, PORT , &hints, &res);
+	status = getaddrinfo(NULL, PORT, &hints, &res);
 	if(status != 0)
 	{
 		fprintf(stderr,"getaddrinfo error: %s\n",gai_strerror(status));
@@ -144,16 +147,24 @@ int main(int argc, char * argv[])
 	printf("I am now connected to %s \n",s);
 
 	int numbytes = 0;
-	char buf[64];
-	//unsigned int microseconds = 1;
+	char* buf = new char[ARR_SIZE];
+	char* msg = new char[ARR_SIZE];
+	for (int i = 0; i < ARR_SIZE; i ++) msg[i] = 'a';
+	cerr << "Start" << endl;
 
 	for (int it = 0; it < ITERATION; it ++) {
+		cout << "s" << it << endl;
 		start (&time1);
-		send(new_conn_fd, "1111111111111111111111111111111111111111111111111111111111111111", 64, 0);
-		recv(new_conn_fd, buf, 64, 0);
+		for (int j = 0; j < REPEAT; j++) { 
+			send(new_conn_fd, msg, ARR_SIZE, 0);
+		}
+		/*for (int j = 0; j < REPEAT; j++) { 
+			recv(new_conn_fd, buf, ARR_SIZE, 0);
+		}*/
+		recv(new_conn_fd, buf, ARR_SIZE, 0);		
 		end (&time2);
 		record[it] = time2 - time1;
-		//sleep(microseconds);
+		cout << "e" << it << endl;
 		//buf[numbytes] = '\0';
 		//printf("Received %s \n", buf);
 	}
@@ -164,6 +175,8 @@ int main(int argc, char * argv[])
 	cerr << "Finish" << endl;
 	ans = filterByVarience(record, ITERATION, result, &count);
 	 
+	delete [] buf;
+	delete [] msg;	
 	delete [] record;
 	delete [] result;
 	
