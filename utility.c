@@ -28,10 +28,10 @@ unsigned long long int computeFilter
     unsigned long long int upper, lower;
     int idx;
     *len_new = 0;
-    upper = mean + mean;
+    upper = mean + VAR_THRES*varience;
     lower = (mean > VAR_THRES*varience) ? mean - VAR_THRES*varience : 0;
     for (idx = 0; idx < len; idx ++) {
-        if (arr[idx] < upper && arr[idx] > lower) {
+        if (arr[idx] <= upper && arr[idx] >= lower) {
             arr_new[*len_new] = arr[idx]; 
             res += arr[idx];
             (*len_new) ++;
@@ -45,7 +45,8 @@ unsigned long long int filterByVarience
     unsigned long long int mean, var, res;
     mean = computeMean (arr, len);
     var = computeVarience (arr, len, mean);
-    res = computeFilter(arr, len, mean, fmin(1.5*var, mean), arr_new, len_new);
+	res = computeFilter(arr, len, mean, var, arr_new, len_new);
+    //res = computeFilter(arr, len, mean, fmin(1.5*var, mean), arr_new, len_new);
     printf("Ans:     %llu\n", res/(*len_new));
     printf("Mean:    %llu\n", mean);
     printf("Var:     %llu\n", var);
