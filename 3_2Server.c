@@ -14,7 +14,7 @@
 #include <sys/time.h>
 #include <asm/unistd.h>
 
-#define PORT "8889"
+#define PORT "8888"
 
 #define ITERATION 100
 #define ARR_SIZE 10000

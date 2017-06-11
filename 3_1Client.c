@@ -8,7 +8,7 @@
 #include <arpa/inet.h>
 #define ITERATION 100
 #define PORT "8888"
-#define IP "100.81.22.217"
+#define IP "10.42.0.1"
 
 int main(int argv, char * argc [])
 {
