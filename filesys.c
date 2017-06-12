@@ -9,7 +9,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <fcntl.h>
-
+#include <malloc.h>
 #define ITERATION 1
 
 inline void start(unsigned long long *ll)
@@ -111,7 +111,7 @@ void file_cache() {
         unsigned long long int size = i*pow(2,30)/10;
         fflush(fp);
         ftruncate(fileno(fp), size);
-        printf("Size of myfile: %d Gbytes.\n", double(i/10));  
+        printf("Size of myfile: %f Gbytes.\n", double(i)/10);  
         fclose(fp);
         fp = fopen("myfile", "r");
         char *temp = (char*) malloc (sizeof(char)*size);
@@ -142,11 +142,32 @@ void file_cache() {
 }
 
 void file_read() {
-    FILE *fp = fopen("myfile", "w");
-    unsigned long long int size = pow(2,30);
-    fflush(fp);
-    ftruncate(fileno(fp), size);
-    fclose(fp);    
+    FILE *f = fopen("myfile", "w");
+    unsigned long long int size = pow(2,33);
+    fflush(f);
+    ftruncate(fileno(f), size);
+    fclose(f);   
+    int fp = open("myfile", O_DIRECT|O_RDWR);
+    unsigned long long int block_num = 1;
+    unsigned long long int s = 0;
+    unsigned long long int time1, time2;
+    for(int i=0; i<10; i++) {
+        lseek64(fp, 0, SEEK_SET);
+        s = 0;
+        block_num = pow(2, i);
+        char* buffer = (char*) memalign(4096*1024, 4096*1024*block_num);
+        start(&time1);
+        while(s < block_num*4096*1024) {
+            ssize_t gap = read(fp, buffer+s, 4096*1024);
+            s += gap;
+        }
+        end(&time2);
+        free(buffer);
+        int t = (time2-time1) / block_num;
+        printf("%llu \n", s);
+        printf("%llu  %d \n", block_num, t);
+    }
+
 }
 
 void contention() {
@@ -154,8 +175,8 @@ void contention() {
 }
 int main(int argc, const char * argv[])
 {
-    file_cache();
-    //file_read();
+    //file_cache();
+    file_read();
     //contention();
 }
 
