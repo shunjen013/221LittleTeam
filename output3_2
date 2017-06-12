@@ -1,0 +1,18 @@
+Loop Back
+Ans:     96279174
+Mean:    95749100
+Var:     3135884
+Cnt_ori: 100
+Cnt_new: 95
+
+4819318454.061519 Bytes/s
+
+
+Thru Network
+Ans:     3524013251
+Mean:    3524294033
+Var:     4410808
+Cnt_ori: 100
+Cnt_new: 79
+
+131668063.35598536 Bytes/s
