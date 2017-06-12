@@ -1,0 +1,14 @@
+Loop Back
+Ans:     15252
+Mean:    15339
+Var:     1275
+Cnt_ori: 100000
+Cnt_new: 98087
+
+Thru Network
+Ans:     918411
+Mean:    948196
+Var:     107640
+Cnt_ori: 10000
+Cnt_new: 8688
+
